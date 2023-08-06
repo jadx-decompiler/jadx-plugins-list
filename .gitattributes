@@ -1,0 +1,11 @@
+*           text=auto eol=lf
+
+*.kt        text eol=lf diff=kotlin
+*.kts       text eol=lf diff=kotlin
+
+*.json       text eol=lf diff=json
+
+/gradlew    text eol=lf
+*.bat       text eol=crlf
+
+*.jar   binary
