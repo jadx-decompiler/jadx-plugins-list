@@ -23,7 +23,8 @@ class ListBuilderCLI : Callable<Int> {
 	lateinit var outputZip: String
 
 	enum class ProcessMode {
-		FULL, DELTA
+		FULL,
+		DELTA,
 	}
 
 	@Option(names = ["-m", "--mode"], description = ["process mode: \${COMPLETION-CANDIDATES}"], required = true)

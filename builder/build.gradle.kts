@@ -4,13 +4,13 @@ import com.diffplug.spotless.LineEnding
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
 plugins {
-	kotlin("jvm") version "1.9.0"
-	kotlin("kapt") version "1.9.0"
-	kotlin("plugin.serialization") version "1.9.0"
+	kotlin("jvm") version "2.0.0"
+	kotlin("kapt") version "2.0.0"
+	kotlin("plugin.serialization") version "2.0.0"
 
-	id("com.github.ben-manes.versions") version "0.47.0"
+	id("com.github.ben-manes.versions") version "0.51.0"
 	id("se.patrikerdes.use-latest-versions") version "0.2.18"
-	id("com.diffplug.spotless") version "6.20.0"
+	id("com.diffplug.spotless") version "6.25.0"
 
 	application
 }
@@ -22,15 +22,15 @@ repositories {
 }
 
 dependencies {
-	implementation("info.picocli:picocli:4.7.4")
-	kapt("info.picocli:picocli-codegen:4.7.4")
+	implementation("info.picocli:picocli:4.7.6")
+	kapt("info.picocli:picocli-codegen:4.7.6")
 
-	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
-	implementation("com.google.code.gson:gson:2.10.1")
-	implementation("io.github.oshai:kotlin-logging-jvm:5.0.2")
-	implementation("ch.qos.logback:logback-classic:1.4.9")
+	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.0")
+	implementation("com.google.code.gson:gson:2.11.0")
+	implementation("io.github.oshai:kotlin-logging-jvm:6.0.9")
+	implementation("ch.qos.logback:logback-classic:1.5.6")
 
-	implementation("io.github.skylot:jadx-plugins-tools:1.5.0-SNAPSHOT") {
+	implementation("io.github.skylot:jadx-plugins-tools:1.5.0") {
 		isChanging = true
 	}
 }
