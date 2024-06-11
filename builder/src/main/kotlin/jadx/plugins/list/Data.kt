@@ -19,7 +19,7 @@ data class PluginListEntry(
 	val locationId: String,
 	val name: String,
 	val description: String,
-	val homepage: String = "",
+	var homepage: String = "",
 	var revision: Int = 0,
 ) {
 	companion object {

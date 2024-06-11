@@ -45,8 +45,25 @@ class Process(private val args: ListBuilderCLI) {
 	private fun resolve(input: InputMetadata): PluginListEntry {
 		log.debug { "resolving plugin: ${input.pluginId} from: ${input.locationId}" }
 		val metadata = JadxPluginsTools.getInstance().resolveMetadata(input.locationId)
-		return PluginListEntry.convert(metadata).apply {
-			this.revision = input.revision
+		val pluginEntry = PluginListEntry.convert(metadata)
+		processPluginEntry(pluginEntry, input)
+		return pluginEntry
+	}
+
+	private fun processPluginEntry(pluginEntry: PluginListEntry, input: InputMetadata) {
+		pluginEntry.revision = input.revision
+		if (pluginEntry.homepage.isBlank()) {
+			pluginEntry.homepage = resolveHomepage(pluginEntry.locationId)
 		}
+	}
+
+	private fun resolveHomepage(locationId: String): String {
+		if (locationId.startsWith("github:")) {
+			val split = locationId.split(":")
+			if (split.size == 3) {
+				return "https://github.com/${split[1]}/${split[2]}"
+			}
+		}
+		return ""
 	}
 }

@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder
 import jadx.core.utils.files.FileUtils
 import java.nio.file.Files
 import java.nio.file.Paths
-import java.nio.file.StandardOpenOption.CREATE_NEW
+import java.nio.file.StandardOpenOption.CREATE
 import java.nio.file.StandardOpenOption.TRUNCATE_EXISTING
 import java.nio.file.StandardOpenOption.WRITE
 import java.util.zip.ZipEntry
@@ -18,7 +18,7 @@ class Bundle(private val zipPath: String) {
 		val zip = Paths.get(zipPath)
 		FileUtils.makeDirsForFile(zip)
 		ZipOutputStream(
-			Files.newOutputStream(zip, WRITE, CREATE_NEW, TRUNCATE_EXISTING).buffered(),
+			Files.newOutputStream(zip, WRITE, CREATE, TRUNCATE_EXISTING).buffered(),
 		).use { out ->
 			out.putNextEntry(ZipEntry("list.json"))
 			out.write(content.toByteArray())
