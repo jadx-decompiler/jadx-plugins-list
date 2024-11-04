@@ -46,11 +46,21 @@ class Process(private val args: ListBuilderCLI) {
 		log.debug { "resolving plugin: ${input.pluginId} from: ${input.locationId}" }
 		val metadata = JadxPluginsTools.getInstance().resolveMetadata(input.locationId)
 		val pluginEntry = PluginListEntry.convert(metadata)
-		processPluginEntry(pluginEntry, input)
+		verifyEntry(pluginEntry, input)
+		processEntry(pluginEntry, input)
 		return pluginEntry
 	}
 
-	private fun processPluginEntry(pluginEntry: PluginListEntry, input: InputMetadata) {
+	private fun verifyEntry(pluginEntry: PluginListEntry, input: InputMetadata) {
+		if (pluginEntry.pluginId != input.pluginId) {
+			throw IllegalArgumentException(
+				"Input plugin id: '${input.pluginId}' should be equal to" +
+					" plugin id from plugin info: '${pluginEntry.pluginId}'",
+			)
+		}
+	}
+
+	private fun processEntry(pluginEntry: PluginListEntry, input: InputMetadata) {
 		pluginEntry.revision = input.revision
 		if (pluginEntry.homepage.isBlank()) {
 			pluginEntry.homepage = resolveHomepage(pluginEntry.locationId)
