@@ -4,9 +4,9 @@ import com.diffplug.spotless.LineEnding
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
 plugins {
-	kotlin("jvm") version "2.0.0"
-	kotlin("kapt") version "2.0.0"
-	kotlin("plugin.serialization") version "2.0.0"
+	kotlin("jvm") version "2.0.21"
+	kotlin("kapt") version "2.0.21"
+	kotlin("plugin.serialization") version "2.0.21"
 
 	id("com.github.ben-manes.versions") version "0.51.0"
 	id("se.patrikerdes.use-latest-versions") version "0.2.18"
@@ -25,12 +25,12 @@ dependencies {
 	implementation("info.picocli:picocli:4.7.6")
 	kapt("info.picocli:picocli-codegen:4.7.6")
 
-	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.0")
+	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
 	implementation("com.google.code.gson:gson:2.11.0")
-	implementation("io.github.oshai:kotlin-logging-jvm:6.0.9")
-	implementation("ch.qos.logback:logback-classic:1.5.6")
+	implementation("io.github.oshai:kotlin-logging-jvm:7.0.0")
+	implementation("ch.qos.logback:logback-classic:1.5.12")
 
-	implementation("io.github.skylot:jadx-plugins-tools:1.5.0") {
+	implementation("io.github.skylot:jadx-plugins-tools:1.5.1-SNAPSHOT") {
 		isChanging = true
 	}
 }
