@@ -30,14 +30,13 @@ class ListBuilderCLI : Callable<Int> {
 	@Option(names = ["-m", "--mode"], description = ["process mode: \${COMPLETION-CANDIDATES}"], required = true)
 	lateinit var mode: ProcessMode
 
-	override fun call(): Int =
-		try {
-			Process(this).exec()
-			0
-		} catch (e: Throwable) {
-			log.error(e) { "Failed to build plugins list" }
-			1
-		}
+	override fun call(): Int = try {
+		Process(this).exec()
+		0
+	} catch (e: Throwable) {
+		log.error(e) { "Failed to build plugins list" }
+		1
+	}
 
 	companion object {
 		@JvmStatic

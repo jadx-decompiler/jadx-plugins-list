@@ -20,27 +20,23 @@ class Process(private val args: ListBuilderCLI) {
 		Bundle(args.outputZip).save(output)
 	}
 
-	private fun processFull(inputs: List<InputMetadata>): List<PluginListEntry> {
-		return inputs.map(::resolve)
-	}
+	private fun processFull(inputs: List<InputMetadata>): List<PluginListEntry> = inputs.map(::resolve)
 
 	private fun processDelta(inputs: List<InputMetadata>): List<PluginListEntry> {
 		TODO()
 	}
 
-	private fun loadInputs(): List<InputMetadata> {
-		return File(args.inputDir)
-			.walkTopDown()
-			.filter { it.name.endsWith(".json") && it.isFile }
-			.map {
-				val data = Json.decodeFromString<InputMetadata>(it.readText())
-				if (data.pluginId.isBlank()) {
-					data.pluginId = it.name.removeSuffix(".json")
-				}
-				data
+	private fun loadInputs(): List<InputMetadata> = File(args.inputDir)
+		.walkTopDown()
+		.filter { it.name.endsWith(".json") && it.isFile }
+		.map {
+			val data = Json.decodeFromString<InputMetadata>(it.readText())
+			if (data.pluginId.isBlank()) {
+				data.pluginId = it.name.removeSuffix(".json")
 			}
-			.toList()
-	}
+			data
+		}
+		.toList()
 
 	private fun resolve(input: InputMetadata): PluginListEntry {
 		log.debug { "resolving plugin: ${input.pluginId} from: ${input.locationId}" }
