@@ -23,12 +23,13 @@ data class PluginListEntry(
 	var revision: Int = 0,
 ) {
 	companion object {
-		fun convert(metadata: JadxPluginMetadata) = PluginListEntry(
-			pluginId = metadata.pluginId,
-			locationId = metadata.locationId,
-			name = metadata.name,
-			description = metadata.description,
-			homepage = metadata.homepage,
-		)
+		fun convert(metadata: JadxPluginMetadata) =
+			PluginListEntry(
+				pluginId = metadata.pluginId,
+				locationId = metadata.locationId,
+				name = metadata.name,
+				description = metadata.description,
+				homepage = metadata.homepage,
+			)
 	}
 }

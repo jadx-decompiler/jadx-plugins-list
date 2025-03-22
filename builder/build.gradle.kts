@@ -65,12 +65,13 @@ fun isNonStable(version: String): Boolean {
 }
 
 configure<SpotlessExtension> {
+	val editorConfigPath = "$rootDir/.editorconfig"
 	kotlin {
-		ktlint().editorConfigOverride(mapOf("indent_style" to "tab"))
+		ktlint().setEditorConfigPath(editorConfigPath)
 		commonFormatOptions()
 	}
 	kotlinGradle {
-		ktlint().editorConfigOverride(mapOf("indent_style" to "tab"))
+		ktlint().setEditorConfigPath(editorConfigPath)
 		commonFormatOptions()
 	}
 }

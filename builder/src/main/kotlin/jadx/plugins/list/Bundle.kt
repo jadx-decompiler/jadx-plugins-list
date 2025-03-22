@@ -11,8 +11,9 @@ import java.nio.file.StandardOpenOption.WRITE
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
-class Bundle(private val zipPath: String) {
-
+class Bundle(
+	private val zipPath: String,
+) {
 	fun save(list: List<PluginListEntry>) {
 		val content = prepareGson().toJson(list)
 		val zip = Paths.get(zipPath)

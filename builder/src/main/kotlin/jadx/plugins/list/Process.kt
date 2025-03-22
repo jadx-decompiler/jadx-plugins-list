@@ -7,16 +7,18 @@ import jadx.plugins.tools.JadxPluginsTools
 import kotlinx.serialization.json.Json
 import java.io.File
 
-class Process(private val args: ListBuilderCLI) {
-
+class Process(
+	private val args: ListBuilderCLI,
+) {
 	private val log = KotlinLogging.logger {}
 
 	fun exec() {
 		val inputs = loadInputs()
-		val output = when (args.mode) {
-			FULL -> processFull(inputs)
-			DELTA -> processDelta(inputs)
-		}
+		val output =
+			when (args.mode) {
+				FULL -> processFull(inputs)
+				DELTA -> processDelta(inputs)
+			}
 		Bundle(args.outputZip).save(output)
 	}
 
@@ -38,8 +40,7 @@ class Process(private val args: ListBuilderCLI) {
 					data.pluginId = it.name.removeSuffix(".json")
 				}
 				data
-			}
-			.toList()
+			}.toList()
 	}
 
 	private fun resolve(input: InputMetadata): PluginListEntry {
@@ -51,7 +52,10 @@ class Process(private val args: ListBuilderCLI) {
 		return pluginEntry
 	}
 
-	private fun verifyEntry(pluginEntry: PluginListEntry, input: InputMetadata) {
+	private fun verifyEntry(
+		pluginEntry: PluginListEntry,
+		input: InputMetadata,
+	) {
 		if (pluginEntry.pluginId != input.pluginId) {
 			throw IllegalArgumentException(
 				"Input plugin id: '${input.pluginId}' should be equal to" +
@@ -60,7 +64,10 @@ class Process(private val args: ListBuilderCLI) {
 		}
 	}
 
-	private fun processEntry(pluginEntry: PluginListEntry, input: InputMetadata) {
+	private fun processEntry(
+		pluginEntry: PluginListEntry,
+		input: InputMetadata,
+	) {
 		pluginEntry.revision = input.revision
 		if (pluginEntry.homepage.isBlank()) {
 			pluginEntry.homepage = resolveHomepage(pluginEntry.locationId)
