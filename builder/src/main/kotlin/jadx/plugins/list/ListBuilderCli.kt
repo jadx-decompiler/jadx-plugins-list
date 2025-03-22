@@ -13,7 +13,7 @@ import kotlin.system.exitProcess
 	mixinStandardHelpOptions = true,
 	sortOptions = false,
 )
-class ListBuilderCLI : Callable<Int> {
+class ListBuilderCli : Callable<Int> {
 	private val log = KotlinLogging.logger {}
 
 	@Option(names = ["-i", "--input"], description = ["input directory"], required = true)
@@ -38,11 +38,8 @@ class ListBuilderCLI : Callable<Int> {
 			log.error(e) { "Failed to build plugins list" }
 			1
 		}
+}
 
-	companion object {
-		@JvmStatic
-		fun main(args: Array<String>) {
-			exitProcess(CommandLine(ListBuilderCLI()).execute(*args))
-		}
-	}
+fun main(args: Array<String>) {
+	exitProcess(CommandLine(ListBuilderCli()).execute(*args))
 }

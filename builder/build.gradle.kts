@@ -42,7 +42,7 @@ java {
 }
 
 application {
-	mainClass.set("jadx.plugins.list.ListBuilderCLI")
+	mainClass.set("jadx.plugins.list.ListBuilderCliKt")
 }
 
 kapt {

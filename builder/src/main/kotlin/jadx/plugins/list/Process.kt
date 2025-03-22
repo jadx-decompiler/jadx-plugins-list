@@ -1,14 +1,14 @@
 package jadx.plugins.list
 
 import io.github.oshai.kotlinlogging.KotlinLogging
-import jadx.plugins.list.ListBuilderCLI.ProcessMode.DELTA
-import jadx.plugins.list.ListBuilderCLI.ProcessMode.FULL
+import jadx.plugins.list.ListBuilderCli.ProcessMode.DELTA
+import jadx.plugins.list.ListBuilderCli.ProcessMode.FULL
 import jadx.plugins.tools.JadxPluginsTools
 import kotlinx.serialization.json.Json
 import java.io.File
 
 class Process(
-	private val args: ListBuilderCLI,
+	private val args: ListBuilderCli,
 ) {
 	private val log = KotlinLogging.logger {}
 
