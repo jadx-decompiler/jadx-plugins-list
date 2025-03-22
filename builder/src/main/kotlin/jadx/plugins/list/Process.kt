@@ -26,20 +26,24 @@ class Process(private val args: ListBuilderCLI) {
 		TODO()
 	}
 
-	private fun loadInputs(): List<InputMetadata> = File(args.inputDir)
-		.walkTopDown()
-		.filter { it.name.endsWith(".json") && it.isFile }
-		.map {
-			val data = Json.decodeFromString<InputMetadata>(it.readText())
-			if (data.pluginId.isBlank()) {
-				data.pluginId = it.name.removeSuffix(".json")
+	private fun loadInputs(): List<InputMetadata> {
+		val inputDir = File(args.inputDir)
+		return inputDir
+			.walkTopDown()
+			.filter { it.name.endsWith(".json") && it.isFile }
+			.sortedBy { it.relativeTo(inputDir).path }
+			.map {
+				val data = Json.decodeFromString<InputMetadata>(it.readText())
+				if (data.pluginId.isBlank()) {
+					data.pluginId = it.name.removeSuffix(".json")
+				}
+				data
 			}
-			data
-		}
-		.toList()
+			.toList()
+	}
 
 	private fun resolve(input: InputMetadata): PluginListEntry {
-		log.debug { "resolving plugin: ${input.pluginId} from: ${input.locationId}" }
+		log.debug { "resolving plugin: '${input.pluginId}' from '${input.locationId}'" }
 		val metadata = JadxPluginsTools.getInstance().resolveMetadata(input.locationId)
 		val pluginEntry = PluginListEntry.convert(metadata)
 		verifyEntry(pluginEntry, input)
