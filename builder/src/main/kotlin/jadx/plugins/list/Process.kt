@@ -3,6 +3,7 @@ package jadx.plugins.list
 import io.github.oshai.kotlinlogging.KotlinLogging
 import jadx.plugins.list.ListBuilderCli.ProcessMode.DELTA
 import jadx.plugins.list.ListBuilderCli.ProcessMode.FULL
+import jadx.plugins.tools.JadxPluginsList
 import jadx.plugins.tools.JadxPluginsTools
 import kotlinx.serialization.json.Json
 import java.io.File
@@ -25,7 +26,15 @@ class Process(
 	private fun processFull(inputs: List<InputMetadata>): List<PluginListEntry> = inputs.map(::resolve)
 
 	private fun processDelta(inputs: List<InputMetadata>): List<PluginListEntry> {
-		TODO()
+		val currentPlugins = JadxPluginsList.getInstance().get().associate { it.pluginId to it }
+		return inputs.map { input ->
+			val existMetadata = currentPlugins[input.pluginId]
+			if (existMetadata != null) {
+				PluginListEntry.convert(existMetadata)
+			} else {
+				resolve(input)
+			}
+		}
 	}
 
 	private fun loadInputs(): List<InputMetadata> {
