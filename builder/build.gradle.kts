@@ -18,7 +18,6 @@ plugins {
 repositories {
 	mavenCentral()
 	google()
-	maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/")
 }
 
 dependencies {
@@ -30,9 +29,7 @@ dependencies {
 	implementation("io.github.oshai:kotlin-logging-jvm:7.0.7")
 	implementation("ch.qos.logback:logback-classic:1.5.18")
 
-	implementation("io.github.skylot:jadx-plugins-tools:1.5.2") {
-		isChanging = true
-	}
+	implementation("io.github.skylot:jadx-plugins-tools:1.5.3")
 }
 
 java {
