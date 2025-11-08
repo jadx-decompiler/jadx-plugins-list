@@ -67,7 +67,7 @@ class Process(
 	) {
 		if (pluginEntry.pluginId != input.pluginId) {
 			throw IllegalArgumentException(
-				"Input plugin id: '${input.pluginId}' should be equal to" +
+				"Input plugin entry id: '${input.pluginId}' should be equal to" +
 					" plugin id from plugin info: '${pluginEntry.pluginId}'",
 			)
 		}
