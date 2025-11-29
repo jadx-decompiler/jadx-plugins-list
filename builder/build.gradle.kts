@@ -30,6 +30,8 @@ dependencies {
 	implementation("ch.qos.logback:logback-classic:1.5.18")
 
 	implementation("io.github.skylot:jadx-plugins-tools:1.5.3")
+
+	implementation("io.github.skylot:jadx-gui:1.5.3")
 }
 
 java {
