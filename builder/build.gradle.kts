@@ -4,13 +4,13 @@ import com.diffplug.spotless.LineEnding
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
 plugins {
-	kotlin("jvm") version "2.2.0"
-	kotlin("kapt") version "2.2.0"
-	kotlin("plugin.serialization") version "2.2.0"
+	kotlin("jvm") version "2.3.0"
+	kotlin("kapt") version "2.3.0"
+	kotlin("plugin.serialization") version "2.3.0"
 
-	id("com.github.ben-manes.versions") version "0.52.0"
-	id("se.patrikerdes.use-latest-versions") version "0.2.18"
-	id("com.diffplug.spotless") version "7.0.4"
+	id("com.github.ben-manes.versions") version "0.53.0"
+	id("se.patrikerdes.use-latest-versions") version "0.2.19"
+	id("com.diffplug.spotless") version "8.1.0"
 
 	application
 }
@@ -25,9 +25,9 @@ dependencies {
 	kapt("info.picocli:picocli-codegen:4.7.7")
 
 	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
-	implementation("com.google.code.gson:gson:2.13.1")
-	implementation("io.github.oshai:kotlin-logging-jvm:7.0.7")
-	implementation("ch.qos.logback:logback-classic:1.5.18")
+	implementation("com.google.code.gson:gson:2.13.2")
+	implementation("io.github.oshai:kotlin-logging-jvm:7.0.13")
+	implementation("ch.qos.logback:logback-classic:1.5.23")
 
 	implementation("io.github.skylot:jadx-plugins-tools:1.5.3")
 
