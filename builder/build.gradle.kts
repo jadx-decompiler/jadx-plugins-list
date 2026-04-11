@@ -4,13 +4,13 @@ import com.diffplug.spotless.LineEnding
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
 plugins {
-	kotlin("jvm") version "2.3.0"
-	kotlin("kapt") version "2.3.0"
-	kotlin("plugin.serialization") version "2.3.0"
+	kotlin("jvm") version "2.3.20"
+	kotlin("kapt") version "2.3.20"
+	kotlin("plugin.serialization") version "2.3.20"
 
 	id("com.github.ben-manes.versions") version "0.53.0"
 	id("se.patrikerdes.use-latest-versions") version "0.2.19"
-	id("com.diffplug.spotless") version "8.1.0"
+	id("com.diffplug.spotless") version "8.4.0"
 
 	application
 }
@@ -24,14 +24,14 @@ dependencies {
 	implementation("info.picocli:picocli:4.7.7")
 	kapt("info.picocli:picocli-codegen:4.7.7")
 
-	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
+	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
 	implementation("com.google.code.gson:gson:2.13.2")
-	implementation("io.github.oshai:kotlin-logging-jvm:7.0.13")
-	implementation("ch.qos.logback:logback-classic:1.5.23")
+	implementation("io.github.oshai:kotlin-logging-jvm:8.0.01")
+	implementation("ch.qos.logback:logback-classic:1.5.32")
 
-	implementation("io.github.skylot:jadx-plugins-tools:1.5.3")
+	implementation("io.github.skylot:jadx-plugins-tools:1.5.5")
 
-	implementation("io.github.skylot:jadx-gui:1.5.3")
+	implementation("io.github.skylot:jadx-gui:1.5.5")
 }
 
 java {
