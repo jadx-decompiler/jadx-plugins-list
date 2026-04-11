@@ -26,10 +26,10 @@ class Process(
 	private fun processFull(inputs: List<InputMetadata>): List<PluginListEntry> = inputs.map(::resolve)
 
 	private fun processDelta(inputs: List<InputMetadata>): List<PluginListEntry> {
-		val currentPlugins = JadxPluginsList.getInstance().get().associate { it.pluginId to it }
+		val currentPlugins = JadxPluginsList.getInstance().get().associateBy { it.pluginId }
 		return inputs.map { input ->
 			val existMetadata = currentPlugins[input.pluginId]
-			if (existMetadata != null) {
+			if (existMetadata != null && existMetadata.revision == input.revision) {
 				PluginListEntry.convert(existMetadata)
 			} else {
 				resolve(input)

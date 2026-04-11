@@ -1,5 +1,6 @@
 package jadx.plugins.list
 
+import jadx.plugins.tools.data.JadxPluginListEntry
 import jadx.plugins.tools.data.JadxPluginMetadata
 import kotlinx.serialization.Serializable
 
@@ -11,7 +12,7 @@ data class InputMetadata(
 )
 
 /**
- * Share most fields with [JadxPluginMetadata]
+ * Copy of [JadxPluginListEntry]
  */
 @Serializable
 data class PluginListEntry(
@@ -27,6 +28,17 @@ data class PluginListEntry(
 			PluginListEntry(
 				pluginId = metadata.pluginId,
 				locationId = metadata.locationId,
+				revision = 0,
+				name = metadata.name,
+				description = metadata.description,
+				homepage = metadata.homepage,
+			)
+
+		fun convert(metadata: JadxPluginListEntry) =
+			PluginListEntry(
+				pluginId = metadata.pluginId,
+				locationId = metadata.locationId,
+				revision = metadata.revision,
 				name = metadata.name,
 				description = metadata.description,
 				homepage = metadata.homepage,
