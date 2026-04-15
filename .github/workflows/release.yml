@@ -1,0 +1,47 @@
+name: Release
+
+# TODO: run on every commit and create release if list content changes
+
+on:
+  push:
+    tags:
+      - "v*"
+
+# additional permissions for provided GitHub token to create new release
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up JDK
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 25
+
+      - name: Set jadx version and release name
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const listVersion = context.ref.split('/').pop()
+            core.exportVariable('LIST_VERSION', listVersion);
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Build
+        run: ./gradlew clean dist
+
+
+      - name: Release
+        uses: softprops/action-gh-release@v3
+        with:
+          name: ${{ env.LIST_VERSION }}
+          draft: true
+          generate_release_notes: true
+          fail_on_unmatched_files: true
+          files: build/dist/jadx-plugins-list.zip

@@ -27,17 +27,10 @@ dependencies {
 	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
 	implementation("com.google.code.gson:gson:2.13.2")
 	implementation("io.github.oshai:kotlin-logging-jvm:8.0.01")
-	implementation("ch.qos.logback:logback-classic:1.5.32")
 
 	implementation("io.github.skylot:jadx-plugins-tools:1.5.5")
 
 	implementation("io.github.skylot:jadx-gui:1.5.5")
-}
-
-java {
-	toolchain {
-		languageVersion.set(JavaLanguageVersion.of(11))
-	}
 }
 
 application {
@@ -48,6 +41,16 @@ kapt {
 	arguments {
 		arg("project", "${project.group}/${project.name}")
 	}
+}
+
+val dist by tasks.registering(JavaExec::class) {
+	group = "dist"
+	classpath = sourceSets.main.get().runtimeClasspath
+	mainClass = "jadx.plugins.list.ListBuilderCliKt"
+	val outZip = rootProject.layout.buildDirectory.file("dist/jadx-plugins-list.zip")
+	setArgsString("-m DELTA -i ${rootDir.absolutePath}/list -o ${outZip.get().asFile.absolutePath}")
+	// resole warning about multiple logback.xml files, set full path
+	jvmArgs = listOf("-Dlogback.configurationFile=file:${project.projectDir.absolutePath}/src/main/resources/logback.xml")
 }
 
 tasks.withType<DependencyUpdatesTask> {

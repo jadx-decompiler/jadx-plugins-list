@@ -21,8 +21,11 @@ class Bundle(
 		ZipOutputStream(
 			Files.newOutputStream(zip, WRITE, CREATE, TRUNCATE_EXISTING).buffered(),
 		).use { out ->
-			out.putNextEntry(ZipEntry("list.json"))
+			val listEntry = ZipEntry("list.json")
+			listEntry.time = 0L // fixed time to get same file content like in 'reproducible builds'
+			out.putNextEntry(listEntry)
 			out.write(content.toByteArray())
+			out.closeEntry()
 		}
 	}
 
