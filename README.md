@@ -29,3 +29,14 @@ with content:
   "locationId": "<locationId of your plugin>"
 }
 ```
+
+### Update plugin metadata
+
+If you changed your plugin name, description or locationId 
+you will need to trigger metadata update by creating PR with increased `revision` property:
+```json
+{
+  "locationId": "<locationId of your plugin>",
+  "revision": 1
+}
+```
